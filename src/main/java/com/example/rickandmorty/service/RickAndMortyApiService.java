@@ -20,8 +20,23 @@ public class RickAndMortyApiService {
                 .block()
                 .getBody();
 
-        return rmApiCharactersResponse.rmCharacterList();
+        return rmApiCharactersResponse.results();
     }
+
+    public List<RMCharacter> getAllCharactersAlive() {
+        RMApiCharactersResponse rmApiCharactersResponse = webClient.get()
+                .uri("/character")
+                .retrieve()
+                .toEntity(RMApiCharactersResponse.class)
+                .block()
+                .getBody();
+
+        return rmApiCharactersResponse.results().stream()
+                .filter(c -> c.status().equals("Alive"))
+                .toList();
+    }
+
+
 
 
 }
