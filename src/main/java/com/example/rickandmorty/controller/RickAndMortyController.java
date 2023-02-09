@@ -19,5 +19,10 @@ public class RickAndMortyController {
     public List<RMCharacter> getRMCharacters(){
         return rickAndMortyApiService.getAllCharacters();
     }
+    
+    @GetMapping("/statusAlive")
+    public List<RMCharacter> getAliveCharacters(){
+        return rickAndMortyApiService.getAllCharactersAlive();
+    }
 }
 
